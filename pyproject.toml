@@ -1,7 +1,7 @@
 [project]
-name = "cdp-python-backend-template"
+name = "fcp-mel-data-ingestion-service"
 version = "0.1.0"
-description = "CDP Python Backend Template"
+description = "fcp-mel-data-ingestion-service"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [

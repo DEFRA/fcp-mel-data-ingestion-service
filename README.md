@@ -1,8 +1,8 @@
-# cdp-python-backend-template
+# fcp-mel-data-ingestion-service
 
 This is work-in-progress. See [To Do List](./TODO.md)
 
-- [cdp-python-backend-template](#cdp-python-backend-template)
+- [fcp-mel-data-ingestion-service](#fcp-mel-data-ingestion-service)
   - [Requirements](#requirements)
     - [Python](#python)
     - [Linting and Formatting](#linting-and-formatting)
