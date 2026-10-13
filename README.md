@@ -234,3 +234,9 @@ information providers in the public sector to license the use and re-use of thei
 licence.
 
 It is designed to encourage use and re-use of information freely and flexibly, with only a few conditions.
+
+## Planned service purpose
+
+This Python service will read clean MEL submission files from S3,
+extract and validate their data, and store accepted records in MongoDB.
+These capabilities are under development.
