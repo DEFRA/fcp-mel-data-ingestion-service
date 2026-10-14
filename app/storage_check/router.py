@@ -34,8 +34,7 @@ router = APIRouter(
 
 
 def list_s3_sample() -> int:
-    # Credentials come from the service's AWS credential provider chain.
-    with boto3.client(
+    s3 = boto3.client(
         "s3",
         region_name="eu-west-2",
         config=Config(
@@ -43,13 +42,16 @@ def list_s3_sample() -> int:
             read_timeout=10,
             retries={"mode": "standard", "total_max_attempts": 2},
         ),
-    ) as s3:
+    )
+
+    try:
         response = s3.list_objects_v2(
             Bucket=DEV_BUCKET,
             MaxKeys=5,
         )
-    # Return a count only: no filenames or file contents.
-    return len(response.get("Contents", []))
+        return len(response.get("Contents", []))
+    finally:
+        s3.close()
 
 
 @router.post("")
