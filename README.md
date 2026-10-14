@@ -240,3 +240,19 @@ It is designed to encourage use and re-use of information freely and flexibly, w
 This Python service will read clean MEL submission files from S3,
 extract and validate their data, and store accepted records in MongoDB.
 These capabilities are under development.
+
+## Development storage connectivity check
+
+POST /internal/storage-check is a temporary backend diagnostic endpoint.
+It returns 404 unless the runtime ENVIRONMENT variable is exactly dev.
+
+It lists at most five objects from the development ingestion bucket,
+then inserts, reads and deletes one uniquely identified synthetic MongoDB
+record in development_smoke_tests. It does not return object names or
+business data and does not upload or modify S3 objects.
+
+Invoke only through approved internal access, such as CDP Terminal.
+The endpoint must not be exposed through a public frontend or gateway.
+If interrupted, a synthetic record may remain for later cleanup.
+
+Remove this diagnostic endpoint before production release.
