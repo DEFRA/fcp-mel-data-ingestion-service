@@ -86,3 +86,23 @@ def test_mongo_read_failure_attempts_cleanup(setup_check):
 
     assert response.status_code == 503
     collection.delete_one.assert_awaited_once()
+
+
+def test_s3_listing_and_cleanup(monkeypatch):
+    from app.storage_check.router import DEV_BUCKET, list_s3_sample
+
+    # Only expose the methods our client actually needs.
+    client = MagicMock(spec=["list_objects_v2", "close"])
+    client.list_objects_v2.return_value = {"Contents": []}
+
+    monkeypatch.setattr(
+        "app.storage_check.router.boto3.client",
+        MagicMock(return_value=client),
+    )
+
+    assert list_s3_sample() == 0
+    client.list_objects_v2.assert_called_once_with(
+        Bucket=DEV_BUCKET,
+        MaxKeys=5,
+    )
+    client.close.assert_called_once()
