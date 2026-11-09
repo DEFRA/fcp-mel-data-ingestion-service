@@ -127,8 +127,9 @@ export MEL_TRANSFER_FILE="$TMP/transfer.json"
 
 run_db() {
   MEL_PHASE="$1" mongosh \
-    --quiet --norc \
-    "$MONGO_URI" \
+    --quiet \
+    --norc \
+    --file "$HOME/.mongoshrc.js" \
     --file "$JS"
 }
 
